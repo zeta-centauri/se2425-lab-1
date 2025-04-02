@@ -1,11 +1,13 @@
 namespace task_2
 {
+    [CompanyInfo("AwesomeSoft", "USA")]
     class Manager : Employee
     {
         public string Department { get; set; }
 
         private double _bonus;
 
+        [SecretInfo("Confidential bonus information", 3)]
         public double Bonus
         {
             get => _bonus;

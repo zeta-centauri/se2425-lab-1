@@ -49,5 +49,29 @@ class Program
             BindingFlags.NonPublic | BindingFlags.Instance
         )!;
         privateMethod?.Invoke(managerInstance, null);
+
+        Console.WriteLine("\nАтрибуты класса Manager:");
+        var classAttributes = type.GetCustomAttributes(false);
+        foreach (var attr in classAttributes)
+        {
+            if (attr is CompanyInfoAttribute companyAttr)
+            {
+                Console.WriteLine($"CompanyInfo: {companyAttr.CompanyName}, {companyAttr.Country}");
+            }
+        }
+
+        // Вывод информации об атрибутах свойства Bonus
+        Console.WriteLine("\nАтрибуты свойства Bonus:");
+        var bonusProperty = type.GetProperty("Bonus");
+        var propertyAttributes = bonusProperty!.GetCustomAttributes(false);
+        foreach (var attr in propertyAttributes)
+        {
+            if (attr is SecretInfoAttribute secretAttr)
+            {
+                Console.WriteLine(
+                    $"SecretInfo: {secretAttr.Description}, Security Level: {secretAttr.SecurityLevel}"
+                );
+            }
+        }
     }
 }
